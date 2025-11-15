@@ -1,6 +1,6 @@
 # Fx
 
-FX lets you make audio effects chains on pretty much any device that can load websites and run javascript.
+FX lets you make audio effects chains on pretty much any device that can load websites and run javascript. [TODO: add link here]
 
 # Why?
 
