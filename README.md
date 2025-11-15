@@ -1,6 +1,45 @@
 # Fx
 
+FX lets you make audio effects chains on pretty much any device that can load websites and run javascript.
+
+# Why?
+
+Pedals are expensive, i thought it would be cool to be able to plug in my guitar to a website that can generate guitar effects.
+
+<small>
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+</small>
+
+<br/>
+
+# `Structure`
+
+The following components keep everyting organized:
+
+## `Effects`
+- javascript objects that take an audio context and add themselves to it
+- examples:
+  - distortion (waveshaper node)
+  - gain - `GainNode`
+  - delay - `DelayNode`
+  - chorus - `DelayNode`?
+  - tremolo - `OscillatorNode` as LFO
+
+## `Chains`
+- fx chains that store multiple effects in series
+
+# Global TODO
+
+- layout:
+  - top menu options:
+    - effects
+    - output - sets up `BaseAudioContext.destination` either for irig or speakers / headset
+- effects
+  - distortion
+  - gain
+  - delay
+  - chorus
+  - tremolo
 
 ## Development server
 
