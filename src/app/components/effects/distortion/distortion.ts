@@ -7,11 +7,18 @@ import { Effect } from '../../../objects/effect';
   templateUrl: './distortion.html',
   styleUrl: './distortion.scss',
 })
-export class Distortion extends Effect {
+export class DistortionComponent extends Effect {
+
+  minimized: boolean = false;
+
   override audioNodes: AudioNode[] = [];
   constructor(audioCtx: AudioContext) {
     super("Distortion", audioCtx);
     this.audioNodes = [new WaveShaperNode(this.audioCtx)];
+  }
+
+  toggleMinimized() {
+    this.minimized = !this.minimized;
   }
 
   override resetConnections(): void {
