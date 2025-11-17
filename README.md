@@ -12,23 +12,47 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 <br/>
 
-# `Structure`
+# Structure
 
-The following components keep everyting organized:
+This is how stuff will be organized:
 
-## `Effects`
-- javascript objects that take an audio context and add themselves to it
+## Effects
+- objects that take an audio context and add themselves to it
 - examples:
   - distortion (waveshaper node)
   - gain - `GainNode`
   - delay - `DelayNode`
   - chorus - `DelayNode`?
   - tremolo - `OscillatorNode` as LFO
+  - amp sim - `ConvolverNode`, use impulse response graphs for common amps, stolen idea from [this comment](https://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion#comment59796643_22313408)
 
-## `Chains`
+## Chains
 - fx chains that store multiple effects in series
+- fx chains are objects with accompanying angular components
 
-# Global TODO
+## Data Model
+- top level 
+
+# Layout
+
+## Effects
+- effects will have:
+  - controls (left arrow, trash, right arrow)
+    - arrows to change pedal posiion
+  - tone name below controls
+  - vertical control sliders distributed evenly
+  - slider names along sliders (in vertical direction)
+
+## Chains
+- chains will display:
+  - all effects lined up horizontally, overflow onto next row
+
+## Controls
+- slider
+  - add vertical text / label 
+- add switch eventually
+
+# Global TODOamp sim / `ConvolverNode`, use impulse response graphs for common amps, stolen idea from [this comment](https://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion#comment59796643_22313408)
 
 - layout:
   - top menu options:
@@ -40,6 +64,7 @@ The following components keep everyting organized:
   - delay
   - chorus
   - tremolo
+  - amp sim
 
 ## Development server
 

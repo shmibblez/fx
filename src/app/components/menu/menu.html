@@ -1,0 +1,19 @@
+<div class="menu">
+    <p class="option" [class.selected]="'FX' === selectedOption" (click)="selectMenuItem('FX', $event)">Effects</p>
+    <p class="option" [class.selected]="'IO' === selectedOption" (click)="selectMenuItem('IO', $event)">Input / Output
+    </p>
+    @if(selectedOption != null) {
+    <!-- todo: show menu as absolute sheet below -->
+    <div class="menu-content">
+        <p>MENU CONTENT GOES HERE</p>
+        @switch(selectedOption) {
+        @case("FX") {
+        <!-- todo: add effects chips with plus button so user can add -->
+        }
+        @case ("IO") {
+        <!-- todo: add io options -->
+        }
+        }
+    </div>
+    }
+</div>

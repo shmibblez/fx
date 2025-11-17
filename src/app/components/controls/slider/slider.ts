@@ -10,6 +10,7 @@ export class Slider {
   @Input({ required: true }) min!: number;
   @Input({ required: true }) max!: number;
   @Input({ required: true }) initialValue!: number;
+  @Input() label: string | null = null;
 
   value: number;
 

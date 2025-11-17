@@ -13,16 +13,6 @@ export abstract class Effect {
         this.audioCtx = audioCtx;
     }
 
-    resetAudioCtx(audioCtx: AudioContext): void {
-        this.audioCtx = audioCtx;
-        // todo: reroute everyting
-    }
-
-    /**
-     * resets audio connections
-     */
-    abstract resetConnections(): void;
-
     /**
      * connects @effect last audio node to this effect's first audio node
      * @param effect connect @effect output to this input

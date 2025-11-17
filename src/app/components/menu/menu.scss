@@ -1,0 +1,43 @@
+.selected {
+    color: #f00f !important;
+}
+
+.option {
+    color: #ffff;
+    width: fit-content;
+    font-size: 2rem;
+}
+
+.option:hover {
+    color: #f00f;
+}
+
+.menu {
+    width: 100vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: none;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    background-color: #222f;
+}
+
+.menu-content {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #222f;
+}
+
+.menu-content p {
+    font-size: 2rem;
+    color: #aaaf;
+    text-align: center;
+}

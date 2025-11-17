@@ -1,13 +1,35 @@
+.slider-container {
+    width: var(--width);
+    height: var(--height);
+    position: relative;
+}
+
+.slider-label {
+    width: 100%;
+    height: auto;
+    transform: rotateZ('-90');
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+}
+
 .slider {
-    height: 100%;
-    width: auto;
+    height: var(--height);
+    width: var(--width);
+    top: 0;
+    left: 0;
     writing-mode: vertical-lr;
     -webkit-appearance: slider-vertical;
     appearance: none;
     direction: rtl;
     vertical-align: middle;
-    --track-color: #f00f;
-    --thumb-color: #f00f;
+    --width: 1rem;
+    --height: 15rem;
+    --thumbWidth: 2rem;
+    --track-color: #ffff;
+    --thumb-color: #ffff;
     --background-color: #0000;
     --transparent: #0000;
 }
@@ -22,7 +44,7 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 15rem;
+    height: var(--height);
 }
 
 /* Removes default focus */
@@ -34,8 +56,9 @@ input[type="range"]:focus {
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
     background-color: var(--track-color);
-    border-radius: 0.5rem;
-    height: 0.5rem;
+    border-radius: 100vw;
+    height: var(--height);
+    width: var(--width)
 }
 
 /* slider thumb */
@@ -43,13 +66,13 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     /* Override default look */
     appearance: none;
-    margin-top: -12px;
+    margin-left: calc(-var(--thumbWidth) / 2);
     /* Centers thumb on the track */
 
     /*custom styles*/
     background-color: var(--thumb-color);
-    height: 2rem;
-    width: 1rem;
+    height: var(--thumbWidth);
+    width: var(--thumbWidth);
 }
 
 // input[type="range"]:focus::-webkit-slider-thumb {   
@@ -63,7 +86,8 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-track {
     background-color: var(--track-color);
     border-radius: 0.5rem;
-    height: 0.5rem;
+    height: var(--height);
+    width: var(--width);
 }
 
 /* slider thumb */
@@ -75,8 +99,8 @@ input[type="range"]::-moz-range-thumb {
 
     /*custom styles*/
     background-color: var(--thumb-color);
-    height: 2rem;
-    width: 1rem;
+    height: var(--thumbWidth);
+    width: var(--thumbWidth);
 }
 
 // input[type="range"]:focus::-moz-range-thumb {
