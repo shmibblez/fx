@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Effect } from '../../../objects/effect';
+import { Effect } from '../../../objects/effects/effect';
 
 @Component({
   selector: 'app-distortion',

@@ -52,8 +52,13 @@ This is how stuff will be organized:
   - add vertical text / label 
 - add switch eventually
 
-# Global TODOamp sim / `ConvolverNode`, use impulse response graphs for common amps, stolen idea from [this comment](https://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion#comment59796643_22313408)
+# Global TODO
 
+## CRITICAL
+- CoreService not working
+
+## not critical:
+- amp sim / `ConvolverNode`, use impulse response graphs for common amps, stolen idea from [this comment](https://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion#comment59796643_22313408)
 - layout:
   - top menu options:
     - effects

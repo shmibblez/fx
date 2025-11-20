@@ -5,13 +5,16 @@
     @if(selectedOption != null) {
     <!-- todo: show menu as absolute sheet below -->
     <div class="menu-content">
-        <p>MENU CONTENT GOES HERE</p>
         @switch(selectedOption) {
         @case("FX") {
-        <!-- todo: add effects chips with plus button so user can add -->
+        <!-- todo: add effects from available effects list -->
+        @for(effect of availableEffects; track effect) {
+        <chip [title]="effect" [onClick]="effectSelected" />
+        }
         }
         @case ("IO") {
         <!-- todo: add io options -->
+        <p>IO CONFIG GOES HERE</p>
         }
         }
     </div>

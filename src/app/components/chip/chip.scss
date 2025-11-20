@@ -1,0 +1,37 @@
+.chip {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border: 2px solid #ffff;
+    border-radius: 100vw;
+    column-gap: 0.25rem;
+}
+
+.title {
+    font-size: 1.25rem;
+    color: #ffff;
+    font-weight: 500;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    color: #ffff;
+    padding: 0;
+    margin: 0;
+}
+
+.chip:hover .title, .chip:hover .icon {
+    color: #f00f !important;
+    fill: #f00f !important;
+}
+
+.chip:hover {
+    border-color: #f00f;
+}
