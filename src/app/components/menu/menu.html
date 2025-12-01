@@ -9,7 +9,7 @@
         @case("FX") {
         <!-- todo: add effects from available effects list -->
         @for(effect of availableEffects; track effect) {
-        <chip [title]="effect" [onClick]="effectSelected" />
+        <chip [title]="effect" (click)="effectSelected($event, effect)" />
         }
         }
         @case ("IO") {

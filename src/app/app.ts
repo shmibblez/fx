@@ -8,9 +8,16 @@ import { CoreService } from './services/core';
   selector: 'app-root',
   imports: [RouterOutlet, MenuComponent, FxRackComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
-  providers: [CoreService],
+  styleUrls: ['./app.scss'],
 })
 export class App {
   protected readonly title = signal('fx');
+
+  constructor(private core: CoreService) {
+    console.log('App initialized, core:', this.core);
+  }
+
+  get fxRack() {
+    return this.core.fxRack;
+  }
 }

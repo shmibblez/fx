@@ -1,29 +1,42 @@
 import { signal, WritableSignal } from "@angular/core";
-import { Effect, EffectType } from "./effects/effect";
+import { Pedal, EffectType } from "./effects/effect";
 import { Distortion } from "./effects/distortion";
 
 export class FxRack {
     public readonly rackName: WritableSignal<string>;
-    public readonly effects: WritableSignal<Effect[]>;
-    private audioCtx: AudioContext;
+    public readonly effects: WritableSignal<Pedal[]>;
+    private audioCtx: AudioContext | null = null;
     private input: MediaStreamAudioSourceNode | null = null;
     constructor(
         rackName: string = "FxRack",
-        effects: Effect[] = [],
+        effects: Pedal[] = [],
     ) {
         this.rackName = signal(rackName);
         this.effects = signal(effects);
+    }
+
+    /**
+     * AudioContext requires user gesture to be created
+     */
+    public initialize() {
+        if (this.audioCtx !== null) {
+            return; // already initialized
+        }
         this.audioCtx = new AudioContext();
         navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then((stream) => {
-            this.input = this.audioCtx.createMediaStreamSource(stream)
+            this.input = this.audioCtx!.createMediaStreamSource(stream)
         })
     }
 
-    private get firstEffect(): Effect | null {
+    public get isInitialized(): boolean {
+        return this.audioCtx !== null;
+    }
+
+    private get firstEffect(): Pedal | null {
         return this.effects()[0];
     }
 
-    private get lastEffect(): Effect | null {
+    private get lastEffect(): Pedal | null {
         return this.effects()[this.effects.length - 1];
     }
 
@@ -34,9 +47,12 @@ export class FxRack {
      * can also be called externally
      */
     resetConnections() {
+        if (!this.isInitialized) return;
+
+        this.input?.disconnect();
         // if no effects yet connect input to output
         if (this.effects.length <= 0) {
-            this.input?.connect(this.audioCtx.destination);
+            this.input?.connect(this.audioCtx!.destination);
             return;
         }
         // connect input to first node
@@ -46,13 +62,13 @@ export class FxRack {
             this.effects()[i].lastNode.connect(this.effects()[i + 1].firstNode)
         }
         // connect last node to output
-        this.lastEffect!.lastNode.connect(this.audioCtx.destination);
+        this.lastEffect!.lastNode.connect(this.audioCtx!.destination);
     }
 
     addEffect(effect: EffectType): void {
         switch (effect) {
             case "distortion": {
-                this.effects().push(new Distortion(this.audioCtx));
+                this.effects().push(new Distortion(this.audioCtx!));
                 break;
             }
             case "eq": {
@@ -102,11 +118,13 @@ export class FxRack {
      * @param index index of effect to connect
      */
     private connectToNext(index: number): void {
+        if (!this.isInitialized) return;
+
         const effect = this.effects()[index];
         effect.lastNode.disconnect() // remove outgoing connections
         if (index >= this.effects().length - 1) {
             // if last effect, connect to output
-            effect.lastNode.connect(this.audioCtx.destination);
+            effect.lastNode.connect(this.audioCtx!.destination);
             return;
         }
         // connect this effect to next one
@@ -118,9 +136,11 @@ export class FxRack {
      * todo: add support for irig
      */
     defineOutput(): void {
+        if (!this.isInitialized) return;
+
         // connect last effect in chain to audio output
         const lastEffect = this.effects()[this.effects().length - 1]
         const lastNode = lastEffect.audioNodes[lastEffect.audioNodes.length - 1];
-        lastNode.connect(this.audioCtx.destination);
+        lastNode.connect(this.audioCtx!.destination);
     }
 }

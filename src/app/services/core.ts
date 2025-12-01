@@ -1,6 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Effect, EffectType } from '../objects/effects/effect';
+import { EffectType } from '../objects/effects/effect';
 import { FxRack } from '../objects/fxRack';
 
 
@@ -14,13 +13,16 @@ import { FxRack } from '../objects/fxRack';
 export class CoreService {
   private core: Core;
 
-  constructor() {
+  public constructor() {
     this.core = new Core();
   }
 
-
-  addEffect(effect: EffectType) {
+  public addEffect(effect: EffectType) {
     this.core.fxRack().addEffect(effect)
+  }
+
+  public get fxRack(): FxRack {
+    return this.core.fxRack();
   }
 }
 

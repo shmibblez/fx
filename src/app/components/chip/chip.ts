@@ -9,5 +9,4 @@ import { EffectType } from '../../objects/effects/effect';
 })
 export class ChipComponent<T> {
   @Input({required: true}) title!: T;
-  @Input({required: true}) onClick!: (event: PointerEvent, title: T) => void;
 }

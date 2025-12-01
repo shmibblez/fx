@@ -70,6 +70,9 @@ This is how stuff will be organized:
   - chorus
   - tremolo
   - amp sim
+- slider idea:
+  - arc with value in the middle, shows progress from left to right with active curve bold white, dot at current value, and inactive curve thin grey, label below (hole in arc is at the bottom above label)
+
 
 ## Development server
 

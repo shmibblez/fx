@@ -1,1 +1,17 @@
-<p>fx-rack works!</p>
+<div class="fx-rack">
+    <p class="title">FX Rack</p>
+    <div class="effects">
+        @for(effect of fxRack.effects(); track effect) {
+        @switch(effect.type) {
+        @case("distortion") {
+        <distortion [distortion]="effectAs(effect)"></distortion>
+        }
+        @case("eq") {
+        <eq [eq]="effectAs(effect)"></eq>
+        }
+        }
+        }
+        <!-- todo: css flex layout -->
+
+    </div>
+</div>

@@ -1,41 +1,26 @@
-import { Component } from '@angular/core';
-import { Effect } from '../../../objects/effects/effect';
+import { Component, Input } from '@angular/core';
+import { Slider } from "../../controls/slider/slider";
+import { Distortion } from '../../../objects/effects/distortion';
 
 @Component({
-  selector: 'app-distortion',
-  imports: [],
+  selector: 'distortion',
+  imports: [Slider],
   templateUrl: './distortion.html',
-  styleUrl: './distortion.scss',
+  styleUrls: ['./distortion.scss'],
 })
-export class DistortionComponent extends Effect {
+export class DistortionComponent {
+  @Input({ required: true }) distortion!: Distortion;
 
-  override audioNodes: AudioNode[] = [];
-  constructor(audioCtx: AudioContext) {
-    super("Distortion", audioCtx);
-    this.audioNodes = [this.makeDistortionNode()];
+  get minVolume(): number {
+    return this.distortion.minVolume;
   }
-
-  private makeDistortionNode(): WaveShaperNode {
-    const distortion = this.audioCtx.createWaveShaper();
-    distortion.curve = this.makeDistortionCurve(400);
-    distortion.oversample = "4x";
-    return distortion
+  get maxVolume(): number {
+    return this.distortion.maxVolume;
   }
-
-  private makeDistortionCurve(amount: number = 50) {
-    const k = amount; 
-    const numSamples = 44100;
-    const curve = new Float32Array(numSamples);
-    const deg = Math.PI / 180;
-
-    for (let i = 0; i < numSamples; i++) {
-      const x = (i * 2) / numSamples - 1;
-      curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
-    }
-    return curve;
+  get minGain(): number {
+    return this.distortion.minGain;
   }
-
-  override connectAfter(effect: Effect): void {
-    effect.audioNodes[effect.audioNodes.length - 1].connect(this.audioNodes[0]);
+  get maxGain(): number {
+    return this.distortion.maxGain;
   }
 }

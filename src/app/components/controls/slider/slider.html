@@ -1,4 +1,4 @@
 <div class="slider-container">
-    <input class="slider" type="range" orient="vertical" [min]="min" [max]="max" [value]="value" />
+    <input class="slider" type="range" orient="vertical" [min]="min" [max]="max" (change)="onChange($event)" [value]="value()" />
     <p class="slider-label">{{label}}</p>
 </div>

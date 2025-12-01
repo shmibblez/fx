@@ -1,8 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { ChipComponent } from '../chip/chip';
 import { availableEffects, EffectType } from '../../objects/effects/effect';
-import { Core, CoreService } from '../../services/core';
-import { Distortion } from '../../objects/effects/distortion';
+import { CoreService } from '../../services/core';
 
 type menuItem = "FX" | "IO"
 
@@ -15,7 +14,9 @@ type menuItem = "FX" | "IO"
 export class MenuComponent {
   selectedOption: menuItem | null = null
 
-  constructor(private core: CoreService) {}
+  constructor(private core: CoreService) {
+    console.log('Menu initialized, core:', this.core);
+  }
 
   get availableEffects() {
     return availableEffects;
@@ -24,17 +25,18 @@ export class MenuComponent {
   selectMenuItem(item: menuItem | null, e: PointerEvent) {
     this.selectedOption = item;
     e.stopPropagation();
-    console.log(`menu item updated: ${item}`)
   }
 
   // unselect when click outside menu
   @HostListener('document:click', ['$event', '$event.target'])
   clickOutside(e: PointerEvent, t: EventTarget | null) {
     this.selectMenuItem(null, e);
+    e.stopPropagation();
   }
 
   effectSelected(event: PointerEvent, effectType: EffectType): void {
     // todo: add effect to current fx chain
     this.core.addEffect(effectType)
+    console.log("effect selected:", effectType);
   }
 }
